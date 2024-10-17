@@ -1,0 +1,30 @@
+﻿@using DT071G_Project_TicTacToe.Components.Models
+
+<div @onclick="@Click" class="square">
+
+    @*kolla om den finns*@
+    @if (Square != null)
+    {
+        //Kolla value, vad för mark som är spelat
+        if (Square.Mark.HasValue)
+        {
+            <span>@Square.Mark.Value</span>
+        }
+    }
+
+</div>
+
+@code {
+    [Parameter]
+    public Square Square { get; set; }
+
+    [Parameter]
+    public Action<MouseEventArgs> ClickParameter { get; set; }
+
+    //Kolla om det är klickat
+    private void Click(MouseEventArgs mouseEventArgs)
+    {
+        //Null check
+        ClickParameter?.Invoke(mouseEventArgs);
+    }
+}

@@ -1,0 +1,51 @@
+﻿@page "/tictactoe"
+
+
+@using DT071G_Project_TicTacToe.Components.Models
+@if (Game != null)
+{
+    <div class="game">
+    @*nästlad for-loop för att skapa rutorna*@
+    @for (var tt = 1; tt <= 3; tt++)
+    {
+       
+            @for (var vv = 1; vv <= 3; vv++)
+            {
+                //Skapa en ny instans av Square
+                var square = Game.Squares[(((tt -1) *3 ) +vv)-1];
+
+                <SquareComponent Square="@square" ClickParameter="@(e => SquareClick(e, square))"></SquareComponent>
+            
+            }
+    }
+
+    </div>
+}
+
+
+@code {
+
+    //Skapa instans av Game
+    public Game Game { get; set; }
+
+    //Skapa initiering
+    protected override async Task OnInitializedAsync()
+    {
+
+        //skapa ny instans av Game - skapa rutorna
+        Game = new Game();
+
+
+        await base.OnInitializedAsync();
+    }
+
+    public void SquareClick(MouseEventArgs mouseEventArgs, Square square)
+    {
+        //vilken har blivit markerad
+        square.Mark = Game.NextTurn;
+        //Ändra spelare
+        Game.Next();
+
+    }   
+
+}
