@@ -1,7 +1,25 @@
-﻿namespace DT071G_Project_TicTacToe.Components.Models
+﻿using project_game_blazor.Models;
+
+namespace DT071G_Project_TicTacToe.Components.Models
 {
     public class Game
     {
+
+        //Kolla efter vinst
+        public List<WinningCombination> WinningCombinations = new List<WinningCombination>
+        {
+            //Horisontellt
+            new WinningCombination(1, 2, 3),
+            new WinningCombination(4, 5, 6),
+            new WinningCombination(7, 8, 9),
+            //Vertikalt
+            new WinningCombination(1, 4, 7),
+            new WinningCombination(2, 5, 8),
+            new WinningCombination(3, 6, 9),
+            //Diagonalt
+            new WinningCombination(1, 5, 9),
+            new WinningCombination(3, 5, 7)
+        };
 
         //Lista med alla rutor
         public List<Square> Squares { get; }
