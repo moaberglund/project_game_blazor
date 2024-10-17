@@ -37,7 +37,11 @@
         @*Meddela vinst*@
         @if (Game.Winner.HasValue)
         {
-        <p class="win">Player "@Game.Winner.Value" has won the game!</p>
+            <p class="result win">Player "@Game.Winner.Value" has won the game!</p>
+        }
+        @*Om alla rutor är ifyllda och ingen har vunnit*@
+        else if (Game.Squares.Count(x => x.Mark.HasValue) == 9){
+            <p class="result draw">It's a draw!</p>
         }
     </div>
 }

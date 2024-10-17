@@ -27,8 +27,16 @@ h3 {
 .resetBtn {
     margin-top: 2em;
 }
-.win {
+
+.result {
     padding: 1em;
-    color: green;
     font-weight: 500;
+}
+
+.win { 
+    color: green;
+}
+
+.draw {
+    color: orange;
 }
