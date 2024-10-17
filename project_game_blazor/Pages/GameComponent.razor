@@ -4,6 +4,10 @@
 @using DT071G_Project_TicTacToe.Components.Models
 @if (Game != null)
 {
+    if (Game.Winner.HasValue)
+    {
+        <p>Player @Game.Winner.Value has won the game!</p>
+    }
     <div class="game">
     @*nästlad for-loop för att skapa rutorna*@
     @for (var tt = 1; tt <= 3; tt++)
@@ -41,11 +45,17 @@
 
     public void SquareClick(MouseEventArgs mouseEventArgs, Square square)
     {
-        //vilken har blivit markerad
-        square.Mark = Game.NextTurn;
-        //Ändra spelare
-        Game.Next();
 
+        //Om ingen har vunnit
+        if (!Game.Winner.HasValue)
+        {
+            //vilken har blivit markerad
+            square.Mark = Game.NextTurn;
+            //Ändra spelare
+            Game.Next();
+
+            StateHasChanged();
+        }
     }   
 
 }

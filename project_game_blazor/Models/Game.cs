@@ -46,17 +46,21 @@ namespace DT071G_Project_TicTacToe.Components.Models
             Winner = null;
 
             //Har någon vunnit?
+            //Loopa igenom alla olika sätt man kan vinna på
             foreach (var winningCombination in WinningCombinations)
             {
-                //Square1, Square2 och Square3 är index i listan Squares
-                if (Squares[winningCombination.Square1 - 1].Mark == Squares[winningCombination.Square2 - 1].Mark &&
-                   Squares[winningCombination.Square2 - 1].Mark == Squares[winningCombination.Square3 - 1].Mark &&
-                   Squares[winningCombination.Square1 - 1].Mark != null)
+                //Har spelare O vunnit
+                if (Squares[winningCombination.Square1 - 1].Mark == MarkEnum.O && Squares[winningCombination.Square2 - 1].Mark == MarkEnum.O && Squares[winningCombination.Square3 - 1].Mark == MarkEnum.O)
                 {
-                    Winner = Squares[winningCombination.Square1 - 1].Mark;
-                    return;
+                    Winner = MarkEnum.O;
+                }
+                // Har spelare X vunnit
+                else if (Squares[winningCombination.Square1 - 1].Mark == MarkEnum.X && Squares[winningCombination.Square2 - 1].Mark == MarkEnum.X && Squares[winningCombination.Square3 - 1].Mark == MarkEnum.X)
+                {
+                    Winner = MarkEnum.X;
                 }
             }
+            //Om det finns en vinnare
             if (Winner.HasValue)
             {
                 ResetGame();
@@ -64,8 +68,6 @@ namespace DT071G_Project_TicTacToe.Components.Models
             }
             else
             {
-
-
                 if (NextTurn == MarkEnum.O)
                 {
                     NextTurn = MarkEnum.X;
