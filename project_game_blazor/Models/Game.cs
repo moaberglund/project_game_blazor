@@ -21,6 +21,10 @@ namespace DT071G_Project_TicTacToe.Components.Models
             new WinningCombination(3, 5, 7)
         };
 
+        //Hålla koll på hur många gånger spelare har vunnit
+        public int OWinner { get; set; }
+        public int XWinner { get; set; }
+
         //Lista med alla rutor
         public List<Square> Squares { get; protected set; }
 
@@ -58,6 +62,18 @@ namespace DT071G_Project_TicTacToe.Components.Models
             //Om det finns en vinnare
             if (Winner.HasValue)
             {
+                //Öka antal vinster för vinnaren
+                if (Winner == MarkEnum.O)
+                {
+                    //Öka med 1
+                    OWinner += 1;
+                }
+                if (Winner == MarkEnum.X)
+                {
+                    //Öka med 1
+                    XWinner += 1;
+                }
+
                 NextTurn = Winner.Value;
             }
             else
