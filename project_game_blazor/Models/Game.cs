@@ -27,6 +27,9 @@ namespace DT071G_Project_TicTacToe.Components.Models
         //kolla vems tur det är
         public MarkEnum NextTurn { get; set; }
 
+        //Vinnare
+        public MarkEnum? Winner { get; set; }
+
         public Game()
         {
             //skapa instans av listan
@@ -39,13 +42,38 @@ namespace DT071G_Project_TicTacToe.Components.Models
         //Ändra spelare
         public void Next()
         {
-            if (NextTurn == MarkEnum.O)
+            //Starta med null
+            Winner = null;
+
+            //Har någon vunnit?
+            foreach (var winningCombination in WinningCombinations)
             {
-                NextTurn = MarkEnum.X;
+                //Square1, Square2 och Square3 är index i listan Squares
+                if (Squares[winningCombination.Square1 - 1].Mark == Squares[winningCombination.Square2 - 1].Mark &&
+                   Squares[winningCombination.Square2 - 1].Mark == Squares[winningCombination.Square3 - 1].Mark &&
+                   Squares[winningCombination.Square1 - 1].Mark != null)
+                {
+                    Winner = Squares[winningCombination.Square1 - 1].Mark;
+                    return;
+                }
+            }
+            if (Winner.HasValue)
+            {
+                ResetGame();
+                NextTurn = Winner.Value;
             }
             else
             {
-                NextTurn = MarkEnum.O;
+
+
+                if (NextTurn == MarkEnum.O)
+                {
+                    NextTurn = MarkEnum.X;
+                }
+                else
+                {
+                    NextTurn = MarkEnum.O;
+                }
             }
         }
 
