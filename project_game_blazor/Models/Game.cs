@@ -22,7 +22,7 @@ namespace DT071G_Project_TicTacToe.Components.Models
         };
 
         //Lista med alla rutor
-        public List<Square> Squares { get; }
+        public List<Square> Squares { get; protected set; }
 
         //kolla vems tur det är
         public MarkEnum NextTurn { get; set; }
@@ -32,8 +32,6 @@ namespace DT071G_Project_TicTacToe.Components.Models
 
         public Game()
         {
-            //skapa instans av listan
-            Squares = new List<Square>();
             //Kalla på metoden ResetGame => skapa spelplanen
             ResetGame();
 
@@ -79,6 +77,9 @@ namespace DT071G_Project_TicTacToe.Components.Models
         //Vid start och restart av spelet
         public void ResetGame()
         {
+            //skapa instans av listan
+            Squares = new List<Square>();
+
             //Sätt startspelare (O default)
             //Om det finns en vinnare från förra rondend, låt denne börja
             NextTurn = (Winner.HasValue ? Winner.Value : MarkEnum.O);

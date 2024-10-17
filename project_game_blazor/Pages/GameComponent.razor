@@ -24,6 +24,7 @@
     }
 
     </div>
+    <button @onclick="@Reset" class="btn btn-dark" >Reset Game</button>
 }
 
 
@@ -59,4 +60,10 @@
         }
     }   
 
+    // onclick reset game
+    public void Reset(MouseEventArgs mouseEventArgs)
+    {
+        Game.ResetGame();
+        StateHasChanged();
+    }
 }
