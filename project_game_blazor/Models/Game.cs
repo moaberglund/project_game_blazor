@@ -42,9 +42,6 @@ namespace DT071G_Project_TicTacToe.Components.Models
         //Ändra spelare
         public void Next()
         {
-            //Starta med null
-            Winner = null;
-
             //Har någon vunnit?
             //Loopa igenom alla olika sätt man kan vinna på
             foreach (var winningCombination in WinningCombinations)
@@ -63,7 +60,6 @@ namespace DT071G_Project_TicTacToe.Components.Models
             //Om det finns en vinnare
             if (Winner.HasValue)
             {
-                ResetGame();
                 NextTurn = Winner.Value;
             }
             else
@@ -83,8 +79,11 @@ namespace DT071G_Project_TicTacToe.Components.Models
         //Vid start och restart av spelet
         public void ResetGame()
         {
-            //sätt default startspelare
-            NextTurn = MarkEnum.O;
+            //Sätt startspelare (O default)
+            //Om det finns en vinnare från förra rondend, låt denne börja
+            NextTurn = (Winner.HasValue ? Winner.Value : MarkEnum.O);
+            //nollställ vinnare
+            Winner = null;
 
             //Skapa 9 rutor
             for (var tt = 1; tt <= 9; tt++)
