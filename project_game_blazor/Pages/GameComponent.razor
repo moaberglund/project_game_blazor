@@ -1,13 +1,20 @@
 ﻿@page "/tictactoe"
 
-
 @using DT071G_Project_TicTacToe.Components.Models
+
+<h1 class="text-center">Tic Tac Toe</h1>
+
+
 @if (Game != null)
 {
-    if (Game.Winner.HasValue)
-    {
-        <p>Player @Game.Winner.Value has won the game!</p>
-    }
+    <div class="score">
+    <h2 class="text-center">Current score: </h2>
+        <div class="scoretable">
+            <h3 class="playerO">Noughts: @Game.OWinner </h3> <h3 class="playerX"> Crosses: @Game.XWinner</h3>
+        </div>
+    </div>
+
+
     <div class="game">
     @*nästlad for-loop för att skapa rutorna*@
     @for (var tt = 1; tt <= 3; tt++)
@@ -24,7 +31,15 @@
     }
 
     </div>
-    <button @onclick="@Reset" class="btn btn-dark" >Reset Game</button>
+    <div class="footer">
+        <button @onclick="@Reset" class="btn btn-dark resetBtn">Reset Game</button>
+        
+        @*Meddela vinst*@
+        @if (Game.Winner.HasValue)
+        {
+        <p class="win">Player "@Game.Winner.Value" has won the game!</p>
+        }
+    </div>
 }
 
 

@@ -1,5 +1,34 @@
-﻿.game {
+﻿
+.game {
     width: 800px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.scoretable {
+    display: flex;
+}
+h3 {
+    font-size: 1.1em;
+}
+.playerO {
+    margin-left: 3em;
+}
+.playerX {
+    margin-right: 3em;
+    margin-left: 50vw;
+}
+
+.footer {
+    text-align: center;
+    line-height: 2em;
+
+}
+.resetBtn {
+    margin-top: 2em;
+}
+.win {
+    padding: 1em;
+    color: green;
+    font-weight: 500;
 }
