@@ -16,13 +16,13 @@
 
 
     <div class="game">
-    @*nästlad for-loop för att skapa rutorna*@
+    @* Nästlad for-loop för att skapa rutorna*@
     @for (var tt = 1; tt <= 3; tt++)
     {
        
             @for (var vv = 1; vv <= 3; vv++)
             {
-                //Skapa en ny instans av Square
+                // Skapa en ny instans av Square
                 var square = Game.Squares[(((tt -1) *3 ) +vv)-1];
 
                 <SquareComponent Square="@square" ClickParameter="@(e => SquareClick(e, square))"></SquareComponent>
@@ -34,12 +34,12 @@
     <div class="footer">
         <button @onclick="@Reset" class="btn btn-dark resetBtn">Reset Game</button>
         
-        @*Meddela vinst*@
+        @* Meddela vinst *@
         @if (Game.Winner.HasValue)
         {
             <p class="result win">Player "@Game.Winner.Value" has won the game!</p>
         }
-        @*Om alla rutor är ifyllda och ingen har vunnit*@
+        @* Om alla rutor är ifyllda och ingen har vunnit *@
         else if (Game.Squares.Count(x => x.Mark.HasValue) == 9){
             <p class="result draw">It's a draw!</p>
         }
@@ -49,14 +49,14 @@
 
 @code {
 
-    //Skapa instans av Game
+    // Skapa instans av Game
     public Game Game { get; set; }
 
-    //Skapa initiering
+    // Skapa initiering
     protected override async Task OnInitializedAsync()
     {
 
-        //skapa ny instans av Game - skapa rutorna
+        // Skapa ny instans av Game - skapa rutorna
         Game = new Game();
 
 
@@ -66,12 +66,12 @@
     public void SquareClick(MouseEventArgs mouseEventArgs, Square square)
     {
 
-        //Om ingen har vunnit
+        // Om ingen har vunnit
         if (!Game.Winner.HasValue)
         {
-            //vilken har blivit markerad
-            square.Mark = Game.NextTurn;
-            //Ändra spelare
+            // Vilken har blivit markerad
+            square.Mark = Game.NextTurn; //Spelares drag
+            // Ändra spelare
             Game.Next();
 
             //Kolla efter ändringar

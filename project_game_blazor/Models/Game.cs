@@ -4,6 +4,8 @@ namespace DT071G_Project_TicTacToe.Components.Models
 {
     public class Game
     {
+        private TicTacToeAI _ai; // AI-instans
+
 
         //Kolla efter vinst
         public List<WinningCombination> WinningCombinations = new List<WinningCombination>
@@ -36,10 +38,26 @@ namespace DT071G_Project_TicTacToe.Components.Models
 
         public Game()
         {
+            _ai = new TicTacToeAI(); // initiera AI
             //Kalla på metoden ResetGame => skapa spelplanen
             ResetGame();
 
         }
+
+        // Kolla efter AI-drag
+        public void AITurn()
+        {
+            if (NextTurn == MarkEnum.X && Winner == null) // Om det är AI:s tur
+            {
+                var (row, col) = _ai.GetBestMove(Squares.ToArray());
+                if (row >= 0 && col >= 0)
+                {
+                    Squares[row * 3 + col].Mark = MarkEnum.X; // Datorns drag
+                    Next();
+                }
+            }
+        }
+
 
         //Ändra spelare
         public void Next()
@@ -49,12 +67,16 @@ namespace DT071G_Project_TicTacToe.Components.Models
             foreach (var winningCombination in WinningCombinations)
             {
                 //Har spelare O vunnit
-                if (Squares[winningCombination.Square1 - 1].Mark == MarkEnum.O && Squares[winningCombination.Square2 - 1].Mark == MarkEnum.O && Squares[winningCombination.Square3 - 1].Mark == MarkEnum.O)
+                if (Squares[winningCombination.Square1 - 1].Mark == MarkEnum.O && 
+                    Squares[winningCombination.Square2 - 1].Mark == MarkEnum.O && 
+                    Squares[winningCombination.Square3 - 1].Mark == MarkEnum.O)
                 {
                     Winner = MarkEnum.O;
                 }
                 // Har spelare X vunnit
-                else if (Squares[winningCombination.Square1 - 1].Mark == MarkEnum.X && Squares[winningCombination.Square2 - 1].Mark == MarkEnum.X && Squares[winningCombination.Square3 - 1].Mark == MarkEnum.X)
+                else if (Squares[winningCombination.Square1 - 1].Mark == MarkEnum.X && 
+                         Squares[winningCombination.Square2 - 1].Mark == MarkEnum.X && 
+                         Squares[winningCombination.Square3 - 1].Mark == MarkEnum.X)
                 {
                     Winner = MarkEnum.X;
                 }
@@ -81,6 +103,7 @@ namespace DT071G_Project_TicTacToe.Components.Models
                 if (NextTurn == MarkEnum.O)
                 {
                     NextTurn = MarkEnum.X;
+                    AITurn(); // Låt AI spela
                 }
                 else
                 {
