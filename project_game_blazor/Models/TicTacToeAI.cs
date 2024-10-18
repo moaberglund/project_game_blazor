@@ -134,7 +134,7 @@ namespace project_game_blazor.Models
             return 0; // Ingen vinnare
         }
 
-        //Kollar om spelbrädet är fullt
+        //Kollar om spelbrädet är fullt => oavgjort
         private bool IsBoardFull(Square[] squares)
         {
             // Retur sann om alla rutor är markerade
