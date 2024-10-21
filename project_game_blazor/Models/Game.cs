@@ -1,6 +1,4 @@
-﻿using project_game_blazor.Models;
-
-namespace DT071G_Project_TicTacToe.Components.Models
+﻿namespace project_game_blazor.Models
 {
     public class Game
     {

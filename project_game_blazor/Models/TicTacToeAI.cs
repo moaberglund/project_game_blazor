@@ -1,6 +1,4 @@
-﻿using DT071G_Project_TicTacToe.Components.Models;
-
-namespace project_game_blazor.Models
+﻿namespace project_game_blazor.Models
 {
     //Klass för att spela mot datorn med hjälp av AI som beräknar bästa draget
     public class TicTacToeAI
