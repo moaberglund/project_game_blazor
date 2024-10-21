@@ -1,10 +1,14 @@
-﻿
+﻿.full-page {
+    max-width: 900px;
+}
+
+
 h1 {
     color: midnightblue;
 }
 
 .game {
-    width: 800px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -13,6 +17,7 @@ h1 {
 }
 .scoretable {
     display: flex;
+    max-width: 900px;
 }
 h3 {
     color: rebeccapurple;
@@ -23,7 +28,7 @@ h3 {
 }
 .playerX {
     margin-right: 3em;
-    margin-left: 50vw;
+    margin-left: 68%;
 }
 
 .footer {
@@ -47,4 +52,12 @@ h3 {
 
 .draw {
     color: orange;
+}
+
+@media all and (max-width: 800px) {
+
+
+    .playerX {
+        margin-left: 50%;
+    }
 }

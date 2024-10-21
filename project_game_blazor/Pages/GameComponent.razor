@@ -2,50 +2,54 @@
 
 @using project_game_blazor.Models
 
-<h1 class="text-center">Tic Tac Toe</h1>
-<p class="card-header">This is a C# application where you play against the computer. You are noughts and the computer is crosses. First time playing, you (noughts) will start the round. If it's a draw, you will start the next round as well. If there is a winner, the winner starts the next round. You can also reset the game with the button.</p>
+<div class="full-page">
+    <h1 class="text-center">Tic Tac Toe</h1>
+    <p class="card-header">This is a C# application where you play against the computer. You are noughts and the computer is crosses. First time playing, you (noughts) will start the round. If it's a draw, you will start the next round as well. If there is a winner, the winner starts the next round. You can also reset the game with the button.</p>
 
-@if (Game != null)
-{
-    <div class="score">
-    <h2 class="text-center">Current score: </h2>
-        <div class="scoretable">
-            <h3 class="playerO">Noughts: @Game.OWinner </h3> <h3 class="playerX"> Crosses: @Game.XWinner</h3>
-        </div>
-    </div>
-
-
-    <div class="game">
-    @* Nästlad for-loop för att skapa rutorna*@
-    @for (var tt = 1; tt <= 3; tt++)
+    @if (Game != null)
     {
-       
-            @for (var vv = 1; vv <= 3; vv++)
+        <div class="score">
+            <h2 class="text-center">Current score: </h2>
+            <div class="scoretable">
+                <h3 class="playerO">Noughts: @Game.OWinner </h3> <h3 class="playerX"> Crosses: @Game.XWinner</h3>
+            </div>
+        </div>
+
+
+        <div class="game">
+            @* Nästlad for-loop för att skapa rutorna*@
+            @for (var tt = 1; tt <= 3; tt++)
             {
-                // Skapa en ny instans av Square
-                var square = Game.Squares[(((tt -1) *3 ) +vv)-1];
 
-                <SquareComponent Square="@square" ClickParameter="@(e => SquareClick(e, square))"></SquareComponent>
-            
+                @for (var vv = 1; vv <= 3; vv++)
+                {
+                    // Skapa en ny instans av Square
+                    var square = Game.Squares[(((tt - 1) * 3) + vv) - 1];
+
+                    <SquareComponent Square="@square" ClickParameter="@(e => SquareClick(e, square))"></SquareComponent>
+
+                }
             }
+
+        </div>
+        <div class="footer">
+            <button @onclick="@Reset" class="btn btn-dark resetBtn">Reset Game</button>
+
+            @* Meddela vinst *@
+            @if (Game.Winner.HasValue)
+            {
+                <p class="result win">Player "@Game.Winner.Value" has won the game!</p>
+            }
+            @* Om alla rutor är ifyllda och ingen har vunnit *@
+            else if (Game.Squares.Count(x => x.Mark.HasValue) == 9)
+            {
+                <p class="result draw">It's a draw!</p>
+            }
+        </div>
+
+
     }
-
-    </div>
-    <div class="footer">
-        <button @onclick="@Reset" class="btn btn-dark resetBtn">Reset Game</button>
-        
-        @* Meddela vinst *@
-        @if (Game.Winner.HasValue)
-        {
-            <p class="result win">Player "@Game.Winner.Value" has won the game!</p>
-        }
-        @* Om alla rutor är ifyllda och ingen har vunnit *@
-        else if (Game.Squares.Count(x => x.Mark.HasValue) == 9){
-            <p class="result draw">It's a draw!</p>
-        }
-    </div>
-}
-
+</div>
 
 @code {
 
@@ -71,13 +75,13 @@
         {
             // Vilken har blivit markerad
             square.Mark = Game.NextTurn; //Spelares drag
-            // Ändra spelare
+                                         // Ändra spelare
             Game.Next();
 
             //Kolla efter ändringar
             StateHasChanged();
         }
-    }   
+    }
 
     // onclick reset game
     public void Reset(MouseEventArgs mouseEventArgs)
