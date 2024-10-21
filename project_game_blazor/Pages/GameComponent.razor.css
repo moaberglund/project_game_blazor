@@ -1,14 +1,21 @@
 ﻿
+h1 {
+    color: midnightblue;
+}
+
 .game {
     width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
-
+.score {
+    margin-top: 2em;
+}
 .scoretable {
     display: flex;
 }
 h3 {
+    color: rebeccapurple;
     font-size: 1.1em;
 }
 .playerO {
@@ -26,6 +33,7 @@ h3 {
 }
 .resetBtn {
     margin-top: 2em;
+    background-color: rebeccapurple;
 }
 
 .result {
