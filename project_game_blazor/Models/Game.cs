@@ -94,7 +94,6 @@
                     XWinner += 1;
                 }
 
-                NextTurn = Winner.Value;
             }
             else
             {
