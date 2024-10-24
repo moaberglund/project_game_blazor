@@ -118,8 +118,7 @@
             Squares = new List<Square>();
 
             //Sätt startspelare (O default)
-            //Om det finns en vinnare från förra rondend, låt denne börja
-            NextTurn = (Winner.HasValue ? Winner.Value : MarkEnum.O);
+            NextTurn = MarkEnum.O;
             //nollställ vinnare
             Winner = null;
 
