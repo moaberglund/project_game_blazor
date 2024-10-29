@@ -34,6 +34,7 @@
         //Vinnare
         public MarkEnum? Winner { get; set; }
 
+        //Konstruktor
         public Game()
         {
             _ai = new TicTacToeAI(); // initiera AI
