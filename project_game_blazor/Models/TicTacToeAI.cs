@@ -132,7 +132,7 @@
         //Kollar om spelbrädet är fullt => oavgjort
         private bool IsBoardFull(Square[] squares)
         {
-            // Retur sann om alla rutor är markerade
+            // Returnera sann om alla rutor är markerade
             return squares.All(square => square.Mark.HasValue);
         }
     }
