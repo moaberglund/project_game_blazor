@@ -4,9 +4,6 @@
     public class TicTacToeAI
     {
 
-        private const char Player = 'O'; // Anta att spelaren är 'O'
-        private const char AI = 'X'; // Datorn är 'X'
-
         //Hitta den bästa rutan för datorn att spela
         public (int, int) GetBestMove(Square[] squares)
         {
